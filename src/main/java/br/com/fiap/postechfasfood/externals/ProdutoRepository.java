@@ -25,87 +25,87 @@ public class ProdutoRepository implements ProdutoRepositoryInterface {
     @Override
     public void cadastrar(ProdutoVO produto) {
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("cdProduto", produto.getCdProduto());
-        params.addValue("nmProduto", produto.getNmProduto());
-        params.addValue("dsDescricao", produto.getDsDescricao());
-        params.addValue("vlPreco", produto.getVlPreco());
-        params.addValue("snAtivo", produto.getSnAtivo());
-        params.addValue("tpCategoria", produto.getTpCategoria().name());
+        params.addValue("cdProduct", produto.getCdProduto());
+        params.addValue("nmProduct", produto.getNmProduto());
+        params.addValue("dsDescription", produto.getDsDescricao());
+        params.addValue("vlPrice", produto.getVlPreco());
+        params.addValue("isActive", produto.getSnAtivo());
+        params.addValue("tpCategory", produto.getTpCategoria().name());
 
         String sql = "INSERT INTO tb_produtos (cd_produto, nm_produto, ds_descricao, vl_preco, sn_ativo, tp_categoria) " +
-                "VALUES (:cdProduto, :nmProduto, :dsDescricao, :vlPreco, :snAtivo, :tpCategoria)";
+                "VALUES (:cdProduct, :nmProduct, :dsDescription, :vlPrice, :isActive, :tpCategory)";
         namedParameterJdbcTemplate.update(sql, params);
     }
 
     @Override
     public void atualizar(String cdProduto, ProdutoVO produto) {
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("cdProduto", cdProduto);
-        params.addValue("nmProduto", produto.getNmProduto());
-        params.addValue("dsDescricao", produto.getDsDescricao());
-        params.addValue("vlPreco", produto.getVlPreco());
-        params.addValue("snAtivo", produto.getSnAtivo());
-        params.addValue("tpCategoria", produto.getTpCategoria().name());
+        params.addValue("cdProduct", cdProduto);
+        params.addValue("nmProduct", produto.getNmProduto());
+        params.addValue("dsDescription", produto.getDsDescricao());
+        params.addValue("vlPrice", produto.getVlPreco());
+        params.addValue("isActive", produto.getSnAtivo());
+        params.addValue("tpCategory", produto.getTpCategoria().name());
 
         String sql = "UPDATE tb_produtos SET " +
-                "nm_produto = :cdProduto, " +
-                "ds_descricao = :dsDescricao, " +
-                "vl_preco = :vlPreco, " +
-                "sn_ativo = :snAtivo, " +
-                "tp_categoria = :tpCategoria " +
-                "WHERE cd_produto = :cdProduto";
+                "nm_produto = :cdProduct, " +
+                "ds_descricao = :dsDescription, " +
+                "vl_preco = :vlPrice, " +
+                "sn_ativo = :isActive, " +
+                "tp_categoria = :tpCategory " +
+                "WHERE cd_produto = :cdProduct";
         namedParameterJdbcTemplate.update(sql, params);
     }
 
     @Override
     public void desativar(String cdProduto) {
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("cdProduto", cdProduto);
-        params.addValue("snAtivo", false);
+        params.addValue("cdProduct", cdProduto);
+        params.addValue("isActive", false);
 
         String sql = "UPDATE tb_produtos SET " +
-                "sn_ativo = :snAtivo " +
-                "WHERE cd_produto = :cdProduto";
+                "sn_ativo = :isActive " +
+                "WHERE cd_produto = :cdProduct";
         namedParameterJdbcTemplate.update(sql, params);
     }
 
     @Override
     public void ativar(String cdProduto) {
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("cdProduto", cdProduto);
-        params.addValue("snAtivo", true);
+        params.addValue("cdProduct", cdProduto);
+        params.addValue("isActive", true);
 
         String sql = "UPDATE tb_produtos SET " +
-                "sn_ativo = :snAtivo " +
-                "WHERE cd_produto = :cdProduto";
+                "sn_ativo = :isActive " +
+                "WHERE cd_produto = :cdProduct";
         namedParameterJdbcTemplate.update(sql, params);
     }
 
     @Override
     public List<ProdutoVO> listar() {
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("snAtivo", true);
+        params.addValue("isActive", true);
 
-        String sql = SELECT_TB_PRODUTOS + " WHERE sn_ativo = :snAtivo";
+        String sql = SELECT_TB_PRODUTOS + " WHERE sn_ativo = :isActive";
         return namedParameterJdbcTemplate.query(sql, params, new ProdutoRowMapper());
     }
 
     @Override
     public List<ProdutoVO> listar(TipoCategoriaProdutoEnum tpCategoria) {
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("snAtivo", true);
-        params.addValue("tpCategoria", tpCategoria.name());
+        params.addValue("isActive", true);
+        params.addValue("tpCategory", tpCategoria.name());
 
-        String sql = SELECT_TB_PRODUTOS + " WHERE sn_ativo = :snAtivo AND tp_categoria = :tpCategoria";
+        String sql = SELECT_TB_PRODUTOS + " WHERE sn_ativo = :isActive AND tp_categoria = :tpCategory";
         return namedParameterJdbcTemplate.query(sql, params, new ProdutoRowMapper());
     }
 
     @Override
     public ProdutoVO buscarPorCdProduto(String cdProduto) {
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("cdProduto", cdProduto);
+        params.addValue("cdProduct", cdProduto);
 
-        String sql = SELECT_TB_PRODUTOS + " WHERE cd_produto = :cdProduto";
+        String sql = SELECT_TB_PRODUTOS + " WHERE cd_produto = :cdProduct";
         return namedParameterJdbcTemplate.queryForObject(sql, params, new ProdutoRowMapper());
     }
 }

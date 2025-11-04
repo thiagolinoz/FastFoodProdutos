@@ -1,6 +1,6 @@
 package br.com.fiap.postechfasfood.hexagonal.domain.models.enuns;
 
-public enum ProdutoEnum {
+public enum ProductEnum {
     LANCHE,
     ACOMPANHAMENTO,
     BEBIDA,

@@ -37,12 +37,12 @@ public class ProdutoEntity {
     @Override
     public String toString() {
         return "ProdutoEntity{" +
-                "cdProduto=" + cdProduto +
-                ", nmProduto='" + nmProduto + '\'' +
-                ", dsDescricao='" + dsDescricao + '\'' +
-                ", vlPreco=" + vlPreco +
-                ", snAtivo=" + snAtivo +
-                ", tpCategoria=" + tpCategoria +
+                "cdProduct=" + cdProduto +
+                ", nmProduct='" + nmProduto + '\'' +
+                ", dsDescription='" + dsDescricao + '\'' +
+                ", vlPrice=" + vlPreco +
+                ", isActive=" + snAtivo +
+                ", tpCategory=" + tpCategoria +
                 '}';
     }
 }

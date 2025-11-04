@@ -120,12 +120,12 @@ public class ProdutoVO {
     @Override
     public String toString() {
         return "ProdutoModel{" +
-                "cdProduto=" + cdProduto +
-                ", nmProduto='" + nmProduto + '\'' +
-                ", dsDescricao='" + dsDescricao + '\'' +
-                ", vlPreco=" + vlPreco +
-                ", snAtivo=" + snAtivo +
-                ", tpCategoria=" + tpCategoria +
+                "cdProduct=" + cdProduto +
+                ", nmProduct='" + nmProduto + '\'' +
+                ", dsDescription='" + dsDescricao + '\'' +
+                ", vlPrice=" + vlPreco +
+                ", isActive=" + snAtivo +
+                ", tpCategory=" + tpCategoria +
                 '}';
     }
 }

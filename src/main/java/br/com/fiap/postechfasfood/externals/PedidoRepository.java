@@ -139,11 +139,11 @@ public class PedidoRepository implements PedidoRepositoryInterface {
     public ProdutosPedidoVO cadastrarProdutosPedido(ProdutosPedidoVO produtosPedidoModel) {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("cdPedido", produtosPedidoModel.getPedido().getCdPedido());
-        params.addValue("cdProduto", produtosPedidoModel.getProduto().getCdProduto());
+        params.addValue("cdProduct", produtosPedidoModel.getProduto().getCdProduto());
         params.addValue("vlQtd", produtosPedidoModel.getVlQuantidade());
 
         String sql = "INSERT INTO tb_pedidos_produtos (cd_pedido, cd_produto, vl_qtd) " +
-                "VALUES (:cdPedido, :cdProduto, :vlQtd)";
+                "VALUES (:cdPedido, :cdProduct, :vlQtd)";
         namedJdbcTemplate.update(sql, params);
         return produtosPedidoModel;
     }

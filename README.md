@@ -63,36 +63,36 @@ Endpoint: GET /api/v1/pessoas/{cdDocPessoa}
 
 ### PRODUTOS
 🔄  Atualiza produtos
-Endpoint: PUT /api/v1/produto/{cdProduto}
-O cdProduto deve ter sido previamente cadastrado via API ou constar na carga inicial de dados.
+Endpoint: PUT /api/v1/productModel/{cdProduct}
+O cdProduct deve ter sido previamente cadastrado via API ou constar na carga inicial de dados.
 **Requisição (JSON):**
 {
-  "nmProduto": “Café”,         // Nome do Produto
-  "dsDescricao": “Café sem açúcar”,         // Descrição do Produto
-  "vlPreco": 8,          // (somente números)
-  "tpCategoria": "LANCHE”,         // outras categorias: (ACOMPANHAMENTO, BEBIDA, SOBREMESA)
+  "nmProduct": “Café”,         // Nome do Produto
+  "dsDescription": “Café sem açúcar”,         // Descrição do Produto
+  "vlPrice": 8,          // (somente números)
+  "tpCategory": "LANCHE”,         // outras categorias: (ACOMPANHAMENTO, BEBIDA, SOBREMESA)
 }
 
-✏️Cadastra produto
-Endpoint: POST /api/v1/produto
+✏️Cadastra productModel
+Endpoint: POST /api/v1/productModel
 **Requisição (JSON):**
 {
-  "nmProduto": “Café”,         // Nome do Produto
-  "dsDescricao": “Café sem açúcar”,         // Descrição do Produto
-  "vlPreco": 8,          // (somente números)
-  "tpCategoria": "LANCHE”,         // outras categorias: (ACOMPANHAMENTO, BEBIDA, SOBREMESA)
+  "nmProduct": “Café”,         // Nome do Produto
+  "dsDescription": “Café sem açúcar”,         // Descrição do Produto
+  "vlPrice": 8,          // (somente números)
+  "tpCategory": "LANCHE”,         // outras categorias: (ACOMPANHAMENTO, BEBIDA, SOBREMESA)
 }
 
 
  🔒 Desativa Produtos existentes
-Endpoint: Patch /api/v1/produto/{cdProduto}/desativar
+Endpoint: Patch /api/v1/productModel/{cdProduct}/desativar
 **Requisição:**
-Informar cdProduto existente
+Informar cdProduct existente
 
  🔓 Ativa Produtos existentes
-Endpoint: Patch /api/v1/produto/{cdProduto}/ativa
+Endpoint: Patch /api/v1/productModel/{cdProduct}/ativa
 **Requisição:**
-Informar cdProduto existente
+Informar cdProduct existente
 
  📄 Lista produtos 
 Endpoint: Get /api/v1/produtos
@@ -101,7 +101,7 @@ Retorna todos os produtos cadastrados
  📑 Lista produtos
 Endpoint: Get /api/v1/produtos/categoria
 **Requisição:**
-Informar tpCategoria
+Informar tpCategory
 Retorna todos os produtos cadastrados por categoria
 
 ### Pedidos
@@ -111,7 +111,7 @@ Endpoint: Post /api/v1/pedidos/checkout
 {
    "itens": [
     {
-      "cdProduto": "973f263a-2cd4-4a73-acfa-bc863595bbb5", // UUID do pedido
+      "cdProduct": "973f263a-2cd4-4a73-acfa-bc863595bbb5", // UUID do pedido
       "vlQuantidade": 2 // quantidade desejada
     }
   ]
@@ -153,8 +153,8 @@ Endpoint: Post /webhook/mercado-pago/pagamentos/{nrPedido}
     Ordem de execução: 
     1. Cadastrar Pessoa
         Endpoint: POST /api/v1/pessoas
-    2. Cadastra produto
-        Endpoint: POST /api/v1/produto
+    2. Cadastra productModel
+        Endpoint: POST /api/v1/productModel
     3. Cadastra pedidos
         Endpoint: Post /api/v1/pedidos/checkout
     4. Recebe notificação de pagamento do Mercado Pago
