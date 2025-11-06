@@ -63,7 +63,7 @@ Endpoint: GET /api/v1/pessoas/{cdDocPessoa}
 
 ### PRODUTOS
 🔄  Atualiza produtos
-Endpoint: PUT /api/v1/productModel/{cdProduct}
+Endpoint: PUT /api/v1/produtoModel/{cdProduct}
 O cdProduct deve ter sido previamente cadastrado via API ou constar na carga inicial de dados.
 **Requisição (JSON):**
 {
@@ -73,8 +73,8 @@ O cdProduct deve ter sido previamente cadastrado via API ou constar na carga ini
   "tpCategory": "LANCHE”,         // outras categorias: (ACOMPANHAMENTO, BEBIDA, SOBREMESA)
 }
 
-✏️Cadastra productModel
-Endpoint: POST /api/v1/productModel
+✏️Cadastra produtoModel
+Endpoint: POST /api/v1/produtoModel
 **Requisição (JSON):**
 {
   "nmProduct": “Café”,         // Nome do Produto
@@ -85,12 +85,12 @@ Endpoint: POST /api/v1/productModel
 
 
  🔒 Desativa Produtos existentes
-Endpoint: Patch /api/v1/productModel/{cdProduct}/desativar
+Endpoint: Patch /api/v1/produtoModel/{cdProduct}/desativar
 **Requisição:**
 Informar cdProduct existente
 
  🔓 Ativa Produtos existentes
-Endpoint: Patch /api/v1/productModel/{cdProduct}/ativa
+Endpoint: Patch /api/v1/produtoModel/{cdProduct}/ativa
 **Requisição:**
 Informar cdProduct existente
 
@@ -153,8 +153,8 @@ Endpoint: Post /webhook/mercado-pago/pagamentos/{nrPedido}
     Ordem de execução: 
     1. Cadastrar Pessoa
         Endpoint: POST /api/v1/pessoas
-    2. Cadastra productModel
-        Endpoint: POST /api/v1/productModel
+    2. Cadastra produtoModel
+        Endpoint: POST /api/v1/produtoModel
     3. Cadastra pedidos
         Endpoint: Post /api/v1/pedidos/checkout
     4. Recebe notificação de pagamento do Mercado Pago
