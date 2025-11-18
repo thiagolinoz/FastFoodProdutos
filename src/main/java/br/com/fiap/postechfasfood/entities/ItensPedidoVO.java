@@ -49,7 +49,7 @@ public class ItensPedidoVO {
     @Override
     public String toString() {
         return "ItensPedidoModel{" +
-                "cdProduto=" + cdProduto +
+                "cdProduct=" + cdProduto +
                 ", vlQuantidade=" + vlQuantidade +
                 '}';
     }

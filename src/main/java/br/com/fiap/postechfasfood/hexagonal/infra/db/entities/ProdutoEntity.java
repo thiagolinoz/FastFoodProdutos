@@ -1,9 +1,5 @@
-package br.com.fiap.postechfasfood.gateways.entities;
-
-import java.util.UUID;
-
-import br.com.fiap.postechfasfood.types.TipoCategoriaProdutoEnum;
-
+package br.com.fiap.postechfasfood.hexagonal.infra.db.entities;
+import br.com.fiap.postechfasfood.hexagonal.domain.models.enuns.ProdutoEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,19 +26,17 @@ public class ProdutoEntity {
     private boolean snAtivo;
     @Enumerated(EnumType.STRING)
     @Column(name = "tp_categoria", nullable = false)
-    private TipoCategoriaProdutoEnum tpCategoria;
-    //@OneToMany(mappedBy = "produto", fetch = FetchType.EAGER)
-    //private List<ProdutoEntity> produtoEntities;
+    private ProdutoEnum tpCategoria;
 
     @Override
     public String toString() {
         return "ProdutoEntity{" +
-                "cdProduct=" + cdProduto +
-                ", nmProduct='" + nmProduto + '\'' +
-                ", dsDescription='" + dsDescricao + '\'' +
-                ", vlPrice=" + vlPreco +
-                ", isActive=" + snAtivo +
-                ", tpCategory=" + tpCategoria +
+                "cdProduto=" + cdProduto +
+                ", nmProduto='" + nmProduto + '\'' +
+                ", dsDescricao='" + dsDescricao + '\'' +
+                ", vlPreco=" + vlPreco +
+                ", snAtivo=" + snAtivo +
+                ", tpCategoria=" + tpCategoria +
                 '}';
     }
 }

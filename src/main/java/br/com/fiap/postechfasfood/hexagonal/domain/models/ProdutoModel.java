@@ -1,25 +1,22 @@
-package br.com.fiap.postechfasfood.entities;
+package br.com.fiap.postechfasfood.hexagonal.domain.models;
 
 
+import br.com.fiap.postechfasfood.hexagonal.domain.models.enuns.ProdutoEnum;
 
-import br.com.fiap.postechfasfood.types.TipoCategoriaProdutoEnum;
-
-import java.util.UUID;
-
-public class ProdutoVO {
+public class ProdutoModel {
 
     private String cdProduto;
     private String nmProduto;
     private String dsDescricao;
     private double vlPreco;
     private boolean snAtivo;
-    private TipoCategoriaProdutoEnum tpCategoria;
-
-    public ProdutoVO() {
+    private ProdutoEnum tpCategoria;
+    
+    public ProdutoModel() {
     }
 
-    public ProdutoVO(String cdProduto, String nmProduto, String dsDescricao, double vlPreco, boolean snAtivo,
-                     TipoCategoriaProdutoEnum tpCategoria) {
+    public ProdutoModel(String cdProduto, String nmProduto, String dsDescricao, double vlPreco, boolean snAtivo,
+                        ProdutoEnum tpCategoria) {
         this.cdProduto = cdProduto;
         this.nmProduto = nmProduto;
         this.dsDescricao = dsDescricao;
@@ -60,19 +57,19 @@ public class ProdutoVO {
         this.vlPreco = vlPreco;
     }
 
-    public void setSnAtivo(boolean snAtivo) {
-        this.snAtivo = snAtivo;
+    public void setAtivo(boolean active) {
+        this.snAtivo = active;
     }
 
-    public boolean getSnAtivo() {
+    public boolean getAtivo() {
         return snAtivo;
     }
 
-    public TipoCategoriaProdutoEnum getTpCategoria() {
+    public ProdutoEnum getTpCategoria() {
         return tpCategoria;
     }
 
-    public void setTpCategoria(TipoCategoriaProdutoEnum tpCategoria) {
+    public void setTpCategoria(ProdutoEnum tpCategoria) {
         this.tpCategoria = tpCategoria;
     }
 
@@ -81,8 +78,8 @@ public class ProdutoVO {
         private String nmProduto;
         private String dsDescricao;
         private double vlPreco;
-        private boolean snAtivo;
-        private TipoCategoriaProdutoEnum tpCategoria;
+        private boolean snActive;
+        private ProdutoEnum tpCategoria;
 
         public Builder setCdProduto(String cdProduto) {
             this.cdProduto = cdProduto;
@@ -104,28 +101,30 @@ public class ProdutoVO {
             return this;
         }
 
-        public Builder setSnAtivo(boolean snAtivo) {
-            this.snAtivo = snAtivo;
+        public Builder setSnActive(boolean snActive) {
+            this.snActive = snActive;
             return this;
         }
 
-        public Builder setTpCategoria(TipoCategoriaProdutoEnum tpCategoria) {
+        public Builder setTpCategoria(ProdutoEnum tpCategoria) {
             this.tpCategoria = tpCategoria;
             return this;
         }
 
-        public ProdutoVO build() {return new ProdutoVO(cdProduto, nmProduto, dsDescricao, vlPreco, snAtivo, tpCategoria);}
+        public ProdutoModel build() {
+            return new ProdutoModel(cdProduto, nmProduto, dsDescricao, vlPreco, snActive, tpCategoria);
+        }
     }
 
     @Override
     public String toString() {
-        return "ProdutoModel{" +
-                "cdProduct=" + cdProduto +
-                ", nmProduct='" + nmProduto + '\'' +
-                ", dsDescription='" + dsDescricao + '\'' +
-                ", vlPrice=" + vlPreco +
-                ", isActive=" + snAtivo +
-                ", tpCategory=" + tpCategoria +
+        return "ProductModel{" +
+                "cdProduto=" + cdProduto +
+                ", nmProduto='" + nmProduto + '\'' +
+                ", dsDescricao='" + dsDescricao + '\'' +
+                ", vlPreco=" + vlPreco +
+                ", snAtivo=" + snAtivo +
+                ", tpCategoria=" + tpCategoria +
                 '}';
     }
 }
