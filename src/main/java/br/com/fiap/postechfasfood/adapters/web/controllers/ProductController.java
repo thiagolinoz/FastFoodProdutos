@@ -1,15 +1,14 @@
-package br.com.fiap.postechfasfood.hexagonal.adapters.web.controllers;
+package br.com.fiap.postechfasfood.adapters.web.controllers;
 
-import br.com.fiap.postechfasfood.hexagonal.adapters.commons.mappers.ProdutoMapper;
-import br.com.fiap.postechfasfood.hexagonal.adapters.web.requests.ProdutoRequest;
-import br.com.fiap.postechfasfood.hexagonal.adapters.web.responses.ProdutoResponse;
-import br.com.fiap.postechfasfood.hexagonal.domain.models.ProdutoModel;
-import br.com.fiap.postechfasfood.hexagonal.domain.models.enuns.ProdutoEnum;
-import br.com.fiap.postechfasfood.hexagonal.domain.ports.in.ProdutoServicePort;
+import br.com.fiap.postechfasfood.adapters.mappers.ProdutoMapper;
+import br.com.fiap.postechfasfood.adapters.web.requests.ProdutoRequest;
+import br.com.fiap.postechfasfood.adapters.web.responses.ProdutoResponse;
+import br.com.fiap.postechfasfood.domain.models.ProdutoModel;
+import br.com.fiap.postechfasfood.domain.models.enuns.ProdutoEnum;
+import br.com.fiap.postechfasfood.domain.ports.in.ProdutoServicePort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +37,7 @@ public class ProductController {
         return ResponseEntity.created(URI.create("/api/v1/produto/" + novoProduto.getCdProduto())).body(new ProdutoResponse(novoProduto));
     }
 
-    @PutMapping("/v1/produto/{cdProduct}")
+    @PutMapping("/v1/produto/{cdProduto}")
     @Operation(summary = "Atualiza produtos", description = "Atualiza produtos existentes")
     public ResponseEntity<ProdutoResponse> atualizarProduto(@PathVariable String cdProduto, @Valid @RequestBody ProdutoRequest request) {
         try {
@@ -49,14 +48,14 @@ public class ProductController {
         }
     }
 
-    @PatchMapping("/v1/produto/{cdProduct}/ativar")
+    @PatchMapping("/v1/produto/{cdProduto}/ativar")
     @Operation(summary = "Ativa produtos", description = "Ativa produtos existentes")
     public ResponseEntity<ProdutoResponse> ativarProduto(@PathVariable String cdProduto) {
         ProdutoModel produtoAtualizado = produtoServicePort.ativar(cdProduto);
         return ResponseEntity.ok(new ProdutoResponse(produtoAtualizado));
     }
 
-    @PatchMapping("/v1/produto/{cdProduct}/desativar")
+    @PatchMapping("/v1/produto/{cdProduto}/desativar")
     @Operation(summary = "Desativa produtos", description = "Desativa produtos existentes")
     public ResponseEntity<ProdutoResponse> desativarProduto(@PathVariable String cdProduto) {
         ProdutoModel produtoAtualizado = produtoServicePort.desativar(cdProduto);

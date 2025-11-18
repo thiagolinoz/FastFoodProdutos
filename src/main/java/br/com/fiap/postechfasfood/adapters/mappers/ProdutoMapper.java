@@ -1,15 +1,15 @@
-package br.com.fiap.postechfasfood.hexagonal.adapters.commons.mappers;
+package br.com.fiap.postechfasfood.adapters.mappers;
 
-import br.com.fiap.postechfasfood.hexagonal.adapters.web.requests.ProdutoRequest;
-import br.com.fiap.postechfasfood.hexagonal.adapters.web.responses.ProdutoResponse;
-import br.com.fiap.postechfasfood.hexagonal.domain.models.ProdutoModel;
-import br.com.fiap.postechfasfood.hexagonal.domain.models.enuns.ProdutoEnum;
-import br.com.fiap.postechfasfood.hexagonal.infra.db.entities.ProdutoEntity;
+import br.com.fiap.postechfasfood.adapters.web.requests.ProdutoRequest;
+import br.com.fiap.postechfasfood.adapters.web.responses.ProdutoResponse;
+import br.com.fiap.postechfasfood.domain.models.ProdutoModel;
+import br.com.fiap.postechfasfood.infra.db.entities.ProdutoEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+@Component
 public class ProdutoMapper {
     public ProdutoModel toModel(ProdutoRequest request){
         ProdutoModel m = new ProdutoModel();
@@ -37,6 +37,16 @@ public class ProdutoMapper {
     }
     public ProdutoEntity toEntity(ProdutoModel model){
         ProdutoEntity e = new ProdutoEntity();
+        e.setNmProduto(model.getNmProduto());
+        e.setDsDescricao(model.getDsDescricao());
+        e.setSnAtivo(model.getAtivo());
+        e.setVlPreco(model.getVlPreco());
+        e.setTpCategoria(model.getTpCategoria());
+        return e;
+    }
+    public ProdutoEntity toEntityWithCdProduto(ProdutoModel model, String cdProduto){
+        ProdutoEntity e = new ProdutoEntity();
+        e.setCdProduto(cdProduto);
         e.setNmProduto(model.getNmProduto());
         e.setDsDescricao(model.getDsDescricao());
         e.setSnAtivo(model.getAtivo());

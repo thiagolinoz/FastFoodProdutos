@@ -1,12 +1,14 @@
-package br.com.fiap.postechfasfood.hexagonal.domain.services;
+package br.com.fiap.postechfasfood.domain.services;
 
-import br.com.fiap.postechfasfood.hexagonal.domain.models.ProdutoModel;
-import br.com.fiap.postechfasfood.hexagonal.domain.models.enuns.ProdutoEnum;
-import br.com.fiap.postechfasfood.hexagonal.domain.ports.in.ProdutoServicePort;
-import br.com.fiap.postechfasfood.hexagonal.domain.ports.out.ProdutoRepositoryPort;
+import br.com.fiap.postechfasfood.domain.models.ProdutoModel;
+import br.com.fiap.postechfasfood.domain.models.enuns.ProdutoEnum;
+import br.com.fiap.postechfasfood.domain.ports.in.ProdutoServicePort;
+import br.com.fiap.postechfasfood.domain.ports.out.ProdutoRepositoryPort;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProdutoService implements ProdutoServicePort {
 
     private final ProdutoRepositoryPort produtoRepositoryPort;
@@ -31,14 +33,12 @@ public class ProdutoService implements ProdutoServicePort {
 
     @Override
     public ProdutoModel ativar(String cdProduto) {
-        produtoRepositoryPort.ativar(cdProduto);
-        return null;
+        return produtoRepositoryPort.ativar(cdProduto);
     }
 
     @Override
     public ProdutoModel desativar(String cdProduto) {
-        produtoRepositoryPort.desativar(cdProduto);
-        return null;
+        return produtoRepositoryPort.desativar(cdProduto);
     }
 
     @Override
