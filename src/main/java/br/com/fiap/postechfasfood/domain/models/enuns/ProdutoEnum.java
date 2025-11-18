@@ -1,4 +1,4 @@
-package br.com.fiap.postechfasfood.hexagonal.domain.models.enuns;
+package br.com.fiap.postechfasfood.domain.models.enuns;
 
 public enum ProdutoEnum {
     LANCHE,

@@ -1,10 +1,10 @@
-package br.com.fiap.postechfasfood.hexagonal.adapters.repositories;
+package br.com.fiap.postechfasfood.adapters.repositories;
 
-import br.com.fiap.postechfasfood.hexagonal.adapters.commons.mappers.ProdutoMapper;
-import br.com.fiap.postechfasfood.hexagonal.domain.models.ProdutoModel;
-import br.com.fiap.postechfasfood.hexagonal.domain.models.enuns.ProdutoEnum;
-import br.com.fiap.postechfasfood.hexagonal.domain.ports.out.ProdutoRepositoryPort;
-import br.com.fiap.postechfasfood.hexagonal.infra.db.entities.ProdutoEntity;
+import br.com.fiap.postechfasfood.adapters.mappers.ProdutoMapper;
+import br.com.fiap.postechfasfood.domain.models.ProdutoModel;
+import br.com.fiap.postechfasfood.domain.models.enuns.ProdutoEnum;
+import br.com.fiap.postechfasfood.domain.ports.out.ProdutoRepositoryPort;
+import br.com.fiap.postechfasfood.infra.db.entities.ProdutoEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -42,7 +42,7 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
         if (produtoAntigo == null){
             throw new Exception("NotFound - produto inexiste");
         }
-        ProdutoEntity produtoEntity = mapper.toEntity(produto);
+        ProdutoEntity produtoEntity = mapper.toEntityWithCdProduto(produto, cdProduto);
         em.merge(produtoEntity);
         return mapper.toModel(produtoEntity);
     }
@@ -67,7 +67,8 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
         if (produto != null){
             produto.setSnAtivo(false);
             em.merge(produto);
-            return mapper.toModel(produto);
+            var r = mapper.toModel(produto);
+            return r;
         }else {
             return null;
         }

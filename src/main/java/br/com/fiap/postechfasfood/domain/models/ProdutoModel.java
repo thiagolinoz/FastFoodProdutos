@@ -1,7 +1,7 @@
-package br.com.fiap.postechfasfood.hexagonal.domain.models;
+package br.com.fiap.postechfasfood.domain.models;
 
 
-import br.com.fiap.postechfasfood.hexagonal.domain.models.enuns.ProdutoEnum;
+import br.com.fiap.postechfasfood.domain.models.enuns.ProdutoEnum;
 
 public class ProdutoModel {
 

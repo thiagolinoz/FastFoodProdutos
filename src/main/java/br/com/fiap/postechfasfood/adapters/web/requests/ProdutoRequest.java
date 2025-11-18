@@ -1,7 +1,7 @@
-package br.com.fiap.postechfasfood.hexagonal.adapters.web.requests;
+package br.com.fiap.postechfasfood.adapters.web.requests;
 
 
-import br.com.fiap.postechfasfood.hexagonal.domain.models.enuns.ProdutoEnum;
+import br.com.fiap.postechfasfood.domain.models.enuns.ProdutoEnum;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 

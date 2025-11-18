@@ -1,29 +1,42 @@
+version: "3.9"
+
 services:
-  fiap-fastfood:
-    image: alexguimaraes21/fiap-fastfood:latest
-    container_name: fiap-fastfood
-    restart: no
-    environment:
-      TZ: America/Sao_Paulo
-      DATASOURCE_URL: jdbc:mariadb://fastood-db:3306/fiap-fastfood
-      DATASOURCE_USERNAME: fiap_postech
-      DATASOURCE_PASSWORD: fiap
-      DATASOURCE_POOL-NAME: fiap-fasfood
-      DATASOURCE_MAXIMUM-POOL-SIZE: 10
-    ports:
-      - 8080:8080
-  fastood-db:
-    image: mariadb:latest
+  fastfood-db:
+    image: mysql:8.0
     container_name: fastfood-db
-    restart: no
+    restart: unless-stopped
     environment:
-      TZ: America/Sao_Paulo
-      MARIADB_DATABASE: fiap-fastfood
-      MARIADB_ROOT_PASSWORD: rootfiap
-      MARIADB_USER: fiap_postech
-      MARIADB_PASSWORD: fiap
-      # Por segurança, a porta do MariaDB fica fechada para rede externa. Apenas acesso na rede do container é permitido
-      # ports:
-      # - 3306:3306
+      MYSQL_DATABASE: fiap-fastfood
+      MYSQL_ROOT_PASSWORD: rootfiap
+      MYSQL_USER: fiap_postech
+      MYSQL_PASSWORD: fiap
+    command: ["mysqld", "--log-bin=OFF"]
+    ports:
+      - "3306:3306"
     volumes:
       - ./data:/var/lib/mysql
+
+    # 🔥 Healthcheck para garantir que o MySQL só fica "pronto" quando está aceitando conexões
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootfiap"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 20s
+
+  fiap-fastfood-produtos:
+    image: maycondockeraccount/fiap-fastfood-produtos:latest
+    container_name: fiap-fastfood-produtos
+
+    # 🔥 Só sobe depois que o MySQL estiver HEALTHY
+    depends_on:
+      fastfood-db:
+        condition: service_healthy
+
+    environment:
+      DATASOURCE_URL: jdbc:mysql://fastfood-db:3306/fiap-fastfood
+      DATASOURCE_USERNAME: fiap_postech
+      DATASOURCE_PASSWORD: fiap
+
+    ports:
+      - "8080:8080"

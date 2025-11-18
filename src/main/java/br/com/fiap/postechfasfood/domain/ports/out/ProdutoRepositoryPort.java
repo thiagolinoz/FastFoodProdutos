@@ -1,7 +1,7 @@
-package br.com.fiap.postechfasfood.hexagonal.domain.ports.out;
+package br.com.fiap.postechfasfood.domain.ports.out;
 
-import br.com.fiap.postechfasfood.hexagonal.domain.models.ProdutoModel;
-import br.com.fiap.postechfasfood.hexagonal.domain.models.enuns.ProdutoEnum;
+import br.com.fiap.postechfasfood.domain.models.ProdutoModel;
+import br.com.fiap.postechfasfood.domain.models.enuns.ProdutoEnum;
 
 import java.util.List;
 

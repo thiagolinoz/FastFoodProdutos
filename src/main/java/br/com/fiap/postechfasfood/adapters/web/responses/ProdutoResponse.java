@@ -1,6 +1,6 @@
-package br.com.fiap.postechfasfood.hexagonal.adapters.web.responses;
+package br.com.fiap.postechfasfood.adapters.web.responses;
 
-import br.com.fiap.postechfasfood.hexagonal.domain.models.ProdutoModel;
+import br.com.fiap.postechfasfood.domain.models.ProdutoModel;
 
 import java.util.List;
 
