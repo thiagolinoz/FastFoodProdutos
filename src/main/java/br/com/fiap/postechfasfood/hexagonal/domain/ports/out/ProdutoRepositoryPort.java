@@ -11,5 +11,6 @@ public interface ProdutoRepositoryPort {
     ProdutoModel atualizar(String cdProduto, ProdutoModel produtoModel) throws Exception;
     ProdutoModel ativar(String cdProduto);
     ProdutoModel desativar(String cdProduto);
+    List<ProdutoModel> listarProdutos();
     List<ProdutoModel> listarProdutosPorCategoria(ProdutoEnum tpCategoria);
 }

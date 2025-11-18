@@ -74,6 +74,7 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
     }
 
     @Override
+    @Transactional
     public List<ProdutoModel> listarProdutosPorCategoria(ProdutoEnum tpCategoria) {
         var jpql = "FROM ProdutoEntity WHERE tpCategoria = :tpCategoria AND snAtivo = true";
         List<ProdutoEntity> produtosEntity = em.createQuery(jpql, ProdutoEntity.class)
@@ -83,6 +84,14 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
         return produtosEntity.stream().map(mapper::toModel).toList();
     }
 
+    @Override
+    @Transactional
+    public List<ProdutoModel> listarProdutos(){
+        var jpql = "FROM ProdutoEntity WHERE snAtivo = true";
+        List<ProdutoEntity> produtosEntity = em.createQuery(jpql, ProdutoEntity.class)
+                .getResultList();
+        return produtosEntity.stream().map(mapper::toModel).toList();
+    }
 
     private ProdutoEntity buscar(String cdProduto) {
         var produto = Optional.ofNullable(em.find(ProdutoEntity.class, cdProduto));

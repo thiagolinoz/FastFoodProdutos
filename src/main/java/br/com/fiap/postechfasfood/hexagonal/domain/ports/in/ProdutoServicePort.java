@@ -10,5 +10,6 @@ public interface ProdutoServicePort {
     ProdutoModel atualizarProduto(String cdProduto, ProdutoModel produtoModel) throws RuntimeException;
     ProdutoModel ativar(String cdProduto);
     ProdutoModel desativar(String cdProduto);
+    List<ProdutoModel> listarProdutos();
     List<ProdutoModel> listarProdutosPorCategoria(ProdutoEnum tpCategoria);
 }

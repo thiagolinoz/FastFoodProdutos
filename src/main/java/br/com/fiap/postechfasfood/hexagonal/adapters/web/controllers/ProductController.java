@@ -68,26 +68,25 @@ public class ProductController {
     @Operation(summary = "Lista produtos", description = "Lista todos produtos existentes por categoria")
     public ResponseEntity<List<ProdutoResponse>> listarPorCategoria(
             @RequestParam ProdutoEnum tpCategoria) {
-        List<ProdutoResponse> listaProdutos = produtoServicePort.listarProdutosPorCategoria(tpCategoria);
+        List<ProdutoModel> listaProdutos = produtoServicePort.listarProdutosPorCategoria(tpCategoria);
 
         if (listaProdutos.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(produtoResponse.stream().map(mapper::t).toList(););
+        return ResponseEntity.ok(mapper.toResoponse(listaProdutos));
     }
-//
-//    @GetMapping("/v1/produtos")
-//    @Operation(summary = "Lista produtos", description = "Lista todos produtos existentes")
-//    public ResponseEntity<List<ProdutoWebHandlerResponse>> buscar() {
-//        final ProductController produtoController = new ProductController();
-//        produtoController.listarProdutos(produtoRepository);
-//        List<ProdutoWebHandlerResponse> produtoResponse = produtoController.listarProdutos(produtoRepository);
-//
-//        if (produtoResponse.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        return ResponseEntity.ok(produtoResponse);
-//    }
+
+    @GetMapping("/v1/produtos")
+    @Operation(summary = "Lista produtos", description = "Lista todos produtos existentes")
+    public ResponseEntity<List<ProdutoResponse>> listarProdutos() {
+
+        List<ProdutoModel> produtoModelList = produtoServicePort.listarProdutos();
+
+        if (produtoModelList.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(mapper.toResoponse(produtoModelList));
+    }
 }

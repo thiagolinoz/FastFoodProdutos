@@ -45,4 +45,9 @@ public class ProdutoService implements ProdutoServicePort {
     public List<ProdutoModel> listarProdutosPorCategoria(ProdutoEnum tpCategoria) {
         return produtoRepositoryPort.listarProdutosPorCategoria(tpCategoria);
     }
+
+    @Override
+    public List<ProdutoModel> listarProdutos() {
+        return produtoRepositoryPort.listarProdutos();
+    }
 }
