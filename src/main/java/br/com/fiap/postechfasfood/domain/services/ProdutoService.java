@@ -23,12 +23,8 @@ public class ProdutoService implements ProdutoServicePort {
     }
 
     @Override
-    public ProdutoModel atualizarProduto(String cdProduto, ProdutoModel produtoModel) throws RuntimeException {
-        try {
-            return produtoRepositoryPort.atualizar(cdProduto, produtoModel);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public ProdutoModel atualizarProduto(String cdProduto, ProdutoModel produtoModel) {
+        return produtoRepositoryPort.atualizar(cdProduto, produtoModel);
     }
 
     @Override
