@@ -12,4 +12,5 @@ public interface ProdutoServicePort {
     ProdutoModel desativar(String cdProduto);
     List<ProdutoModel> listarProdutos();
     List<ProdutoModel> listarProdutosPorCategoria(ProdutoEnum tpCategoria);
+    ProdutoModel consultarProduto(String cdProduto);
 }

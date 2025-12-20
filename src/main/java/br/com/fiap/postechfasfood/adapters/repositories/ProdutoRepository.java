@@ -87,6 +87,16 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
 
     @Override
     @Transactional
+    public ProdutoModel consultarProduto(String cdProduto) {
+        var jpql = "FROM ProdutoEntity WHERE cdProduto = :cdProduto";
+        ProdutoEntity produtosEntity = em.createQuery(jpql, ProdutoEntity.class)
+                .setParameter("cdProduto", cdProduto)
+                .getSingleResult();
+        return mapper.toModel(produtosEntity);
+    }
+
+    @Override
+    @Transactional
     public List<ProdutoModel> listarProdutos(){
         var jpql = "FROM ProdutoEntity WHERE snAtivo = true";
         List<ProdutoEntity> produtosEntity = em.createQuery(jpql, ProdutoEntity.class)

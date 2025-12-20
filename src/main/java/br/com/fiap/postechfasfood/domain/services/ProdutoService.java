@@ -47,6 +47,11 @@ public class ProdutoService implements ProdutoServicePort {
     }
 
     @Override
+    public ProdutoModel consultarProduto(String cdProduto) {
+        return produtoRepositoryPort.consultarProduto(cdProduto);
+    }
+
+    @Override
     public List<ProdutoModel> listarProdutos() {
         return produtoRepositoryPort.listarProdutos();
     }

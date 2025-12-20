@@ -88,4 +88,17 @@ public class ProductController {
 
         return ResponseEntity.ok(mapper.toResoponse(produtoModelList));
     }
+
+    @GetMapping("/v1/produtos/{cdProduto}")
+    @Operation(summary = "Consulta produto", description = "Retorna produto de acordo com o Id informado")
+    public ResponseEntity<ProdutoResponse> consultarProduto(@PathVariable String cdProduto) {
+
+        ProdutoModel produtoModel = produtoServicePort.consultarProduto(cdProduto);
+
+        if (produtoModel == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(new ProdutoResponse(produtoModel));
+    }
 }
