@@ -7,6 +7,7 @@ import br.com.fiap.postechfasfood.domain.models.enuns.ProdutoEnum;
 import br.com.fiap.postechfasfood.domain.ports.out.ProdutoRepositoryPort;
 import br.com.fiap.postechfasfood.infra.db.entities.ProdutoEntity;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -83,6 +84,20 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
                 .getResultList();
 
         return produtosEntity.stream().map(mapper::toModel).toList();
+    }
+
+    @Override
+    @Transactional
+    public ProdutoModel consultarProduto(String cdProduto) {
+        try{
+            var jpql = "FROM ProdutoEntity WHERE cdProduto = :cdProduto";
+            Optional<ProdutoEntity> produtosEntity = Optional.ofNullable(em.createQuery(jpql, ProdutoEntity.class)
+                    .setParameter("cdProduto", cdProduto)
+                    .getSingleResult());
+            return mapper.toModel(produtosEntity.get());
+        }catch (NoResultException e){
+            return null;
+        }
     }
 
     @Override
