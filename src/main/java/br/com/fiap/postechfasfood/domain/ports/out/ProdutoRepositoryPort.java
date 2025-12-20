@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProdutoRepositoryPort {
     ProdutoModel cadastrar(ProdutoModel produtoModel);
-    ProdutoModel atualizar(String cdProduto, ProdutoModel produtoModel) throws Exception;
+    ProdutoModel atualizar(String cdProduto, ProdutoModel produtoModel);
     ProdutoModel ativar(String cdProduto);
     ProdutoModel desativar(String cdProduto);
     List<ProdutoModel> listarProdutos();

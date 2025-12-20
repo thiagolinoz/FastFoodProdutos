@@ -1,6 +1,7 @@
 package br.com.fiap.postechfasfood.adapters.repositories;
 
 import br.com.fiap.postechfasfood.adapters.mappers.ProdutoMapper;
+import br.com.fiap.postechfasfood.domain.exceptions.ProdutoNotFoundException;
 import br.com.fiap.postechfasfood.domain.models.ProdutoModel;
 import br.com.fiap.postechfasfood.domain.models.enuns.ProdutoEnum;
 import br.com.fiap.postechfasfood.domain.ports.out.ProdutoRepositoryPort;
@@ -38,10 +39,10 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
 
     @Override
     @Transactional
-    public ProdutoModel atualizar(String cdProduto, ProdutoModel produto) throws Exception {
+    public ProdutoModel atualizar(String cdProduto, ProdutoModel produto) {
         var produtoAntigo = buscar(cdProduto);
         if (produtoAntigo == null){
-            throw new Exception("NotFound - produto inexiste");
+            throw new ProdutoNotFoundException("Produto não encontrado: " + cdProduto);
         }
         ProdutoEntity produtoEntity = mapper.toEntityWithCdProduto(produto, cdProduto);
         em.merge(produtoEntity);
@@ -68,8 +69,7 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
         if (produto != null){
             produto.setSnAtivo(false);
             em.merge(produto);
-            var r = mapper.toModel(produto);
-            return r;
+            return mapper.toModel(produto);
         }else {
             return null;
         }
@@ -112,8 +112,7 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
     private ProdutoEntity buscar(String cdProduto) {
         var produto = Optional.ofNullable(em.find(ProdutoEntity.class, cdProduto));
         if(produto.isPresent()){
-            ProdutoEntity produtoEntity = produto.get();
-            return produtoEntity;
+            return produto.get();
         }else {
             return null;
         }
