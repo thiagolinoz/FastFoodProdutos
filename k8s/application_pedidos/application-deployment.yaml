@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-produtos-java
+  name: app-pedidos-java
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: java-app
+      app: app-pedidos-java
   template:
     metadata:
       labels:
-        app: java-app
+        app: app-pedidos-java
     spec:
       containers:
-        - name: java-app
-          image: maycondockeraccount/fiap-fastfood-produtos:latest #REPO_ECR #maycondockeraccount/k8s:latest #maycondockeraccount/fiap-fastfood #alexguimaraes21/fiap-fastfood:latest
+        - name: app-pedidos-java
+          image: devthiagosouza/fiap_postech_pedidos:latest #REPO_ECR #maycondockeraccount/k8s:latest #maycondockeraccount/fiap-fastfood #alexguimaraes21/fiap-fastfood:latest
           # endpoint da imagem de teste k8s = http://localhost:8080/api/v1/mockApi
           resources:
             requests:
@@ -40,29 +40,41 @@ spec:
             - name: DATASOURCE_URL
               valueFrom:
                 configMapKeyRef:
-                  name: app-produtos-config
+                  name: app-pedidos-config
                   key: DATASOURCE_URL
+
+            - name: PESSOAS_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-pedidos-config
+                  key: PESSOAS_API_URL
+
+            - name: PRODUTOS_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-pedidos-config
+                  key: PRODUTOS_API_URL
 
             - name: DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: app-produtos-secret
+                  name: app-pedidos-secret
                   key: DATASOURCE_USERNAME
 
             - name: DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: app-produtos-secret
+                  name: app-pedidos-secret
                   key: DATASOURCE_PASSWORD
 
             - name: DATASOURCE_POOL-NAME
               valueFrom:
                 secretKeyRef:
-                  name: app-produtos-secret
+                  name: app-pedidos-secret
                   key: DATASOURCE_POOL-NAME
 
             - name: DATASOURCE_MAXIMUM-POOL-SIZE
               valueFrom:
                 secretKeyRef:
-                  name: app-produtos-secret
+                  name: app-pedidos-secret
                   key: DATASOURCE_MAXIMUM-POOL-SIZE
