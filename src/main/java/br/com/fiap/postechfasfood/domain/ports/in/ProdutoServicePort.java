@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProdutoServicePort {
     ProdutoModel cadastrar(ProdutoModel produtoModel);
-    ProdutoModel atualizarProduto(String cdProduto, ProdutoModel produtoModel) throws RuntimeException;
+    ProdutoModel atualizarProduto(String cdProduto, ProdutoModel produtoModel);
     ProdutoModel ativar(String cdProduto);
     ProdutoModel desativar(String cdProduto);
     List<ProdutoModel> listarProdutos();
