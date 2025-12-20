@@ -96,7 +96,7 @@ public class ProductController {
         ProdutoModel produtoModel = produtoServicePort.consultarProduto(cdProduto);
 
         if (produtoModel == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
 
         return ResponseEntity.ok(new ProdutoResponse(produtoModel));
