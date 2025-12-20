@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-java
+  name: app-produtos-java
 spec:
   replicas: 1
   selector:
@@ -40,29 +40,29 @@ spec:
             - name: DATASOURCE_URL
               valueFrom:
                 configMapKeyRef:
-                  name: app-config
+                  name: app-produtos-config
                   key: DATASOURCE_URL
 
             - name: DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: app-secret
+                  name: app-produtos-secret
                   key: DATASOURCE_USERNAME
 
             - name: DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: app-secret
+                  name: app-produtos-secret
                   key: DATASOURCE_PASSWORD
 
             - name: DATASOURCE_POOL-NAME
               valueFrom:
                 secretKeyRef:
-                  name: app-secret
+                  name: app-produtos-secret
                   key: DATASOURCE_POOL-NAME
 
             - name: DATASOURCE_MAXIMUM-POOL-SIZE
               valueFrom:
                 secretKeyRef:
-                  name: app-secret
+                  name: app-produtos-secret
                   key: DATASOURCE_MAXIMUM-POOL-SIZE
