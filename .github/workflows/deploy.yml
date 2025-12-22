@@ -3,11 +3,11 @@ name: CI/CD com Dockerfile
 on:
   push:
     branches:
-      - separando_applicação
+      - main
 
 env:
   EKS_CLUSTER_NAME: eks-postech-fiap-fastfood
-  ECR_REPOSITORY: postech-fiap-fastfood
+  ECR_REPOSITORY: fastfood-produtos
   AWS_REGION: us-east-1
 
 jobs:
@@ -54,7 +54,7 @@ jobs:
       - name: Deploy no Kubernetes
         run: |
           sed -i "s|REPO_ECR|${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest|g" ./k8s/application/application-deployment.yaml
-          kubectl apply -f ./k8s/configmap.yaml
+          kubectl apply -f ./k8s/application/configmap.yaml
           kubectl apply -f ./k8s/application/application-secrets.yaml
           kubectl apply -f ./k8s/application/application-service.yaml
           kubectl apply -f ./k8s/application/application-deployment.yaml
