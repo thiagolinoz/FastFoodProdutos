@@ -7,3 +7,13 @@ resource "aws_rds_cluster_instance" "aurora_instance" {
   publicly_accessible = true
   tags                = var.tags
 }
+
+resource "aws_rds_cluster_instance" "aurora_instance_pedidos" {
+  identifier          = "fiap-fastfood-pedidos-aurora-instance-1"
+  cluster_identifier  = aws_rds_cluster.aurora_cluster-pedidos.id
+  instance_class      = "db.t3.medium"
+  engine              = aws_rds_cluster.aurora_cluster-pedidos.engine
+  engine_version      = aws_rds_cluster.aurora_cluster-pedidos.engine_version
+  publicly_accessible = true
+  tags                = var.tags
+}
