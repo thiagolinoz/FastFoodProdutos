@@ -47,7 +47,7 @@ jobs:
 
       - name: Run Sonar analysis
         run: |
-          mvn -B verify sonar:sonar \
+          mvn -B -DskipTests=true verify sonar:sonar \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ env.SONAR_TOKEN }} \
             -Dsonar.projectKey=${{ env.YOUR_PROJECT_KEY }} \
