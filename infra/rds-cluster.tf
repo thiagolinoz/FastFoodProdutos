@@ -10,3 +10,16 @@ resource "aws_rds_cluster" "aurora_cluster" {
   skip_final_snapshot    = true
   tags                   = var.tags
 }
+
+resource "aws_rds_cluster" "aurora_cluster-pedidos" {
+  cluster_identifier = "fiap-fastfood-aurora-pedidos"
+  engine             = "aurora-mysql"
+  #engine_version          = "8.0.mysql_aurora.3.04.0"
+  master_username        = "admin"
+  master_password        = "admin123"
+  database_name          = "fiapfastfoodPedidos"
+  db_subnet_group_name   = aws_db_subnet_group.aurora_subnet_group.name
+  vpc_security_group_ids = [aws_security_group.aurora_sg.id]
+  skip_final_snapshot    = true
+  tags                   = var.tags
+}
