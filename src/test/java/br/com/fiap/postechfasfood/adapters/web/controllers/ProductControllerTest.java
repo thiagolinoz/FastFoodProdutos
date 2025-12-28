@@ -333,4 +333,43 @@ class ProductControllerTest {
 
         verify(produtoServicePort, times(ProdutoEnum.values().length)).listarProdutosPorCategoria(any());
     }
+
+    @Test
+    @DisplayName("Deve retornar 204 ao consultar produto inexistente")
+    void deveRetornar204AoConsultarProdutoInexistente() {
+        // Arrange
+        String cdProduto = "123e4567-e89b-12d3-a456-426614174000";
+        when(produtoServicePort.consultarProduto(cdProduto)).thenReturn(null);
+
+        // Act
+        ResponseEntity<ProdutoResponse> response = productController.consultarProduto(cdProduto);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        assertNull(response.getBody());
+        verify(produtoServicePort).consultarProduto(cdProduto);
+        verifyNoInteractions(mapper);
+    }
+
+    @Test
+    @DisplayName("Deve consultar produto com sucesso e retornar 200")
+    void deveConsultarProdutoComSucesso() {
+        // Arrange
+        String cdProduto = produtoModel.getCdProduto();
+        when(produtoServicePort.consultarProduto(cdProduto)).thenReturn(produtoModel);
+
+        // Act
+        ResponseEntity<ProdutoResponse> response = productController.consultarProduto(cdProduto);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(produtoModel.getCdProduto(), response.getBody().cdProduto());
+        assertEquals(produtoModel.getNmProduto(), response.getBody().nmProduto());
+        assertEquals(produtoModel.getTpCategoria(), ProdutoEnum.valueOf(response.getBody().tpCategoria()));
+        verify(produtoServicePort).consultarProduto(cdProduto);
+        verifyNoInteractions(mapper);
+    }
 }
