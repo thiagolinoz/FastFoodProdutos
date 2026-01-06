@@ -133,8 +133,10 @@ Retorna todos os produtos cadastrados por categoria
 6. rodar
    ````bash
    kubectl port-forward service/app-service 30080:8080
+   
 ## Desenho de Arquitetura
-O arquido do desenho de arquitetura econtra-se na pasta [./arquitetura/arquitetura fase 2.drawio](https://drive.google.com/file/d/1lfFRoWELXDzc1qfbsgWVOna_1l8oJOjV/view?pli=1)
+O arquido do desenho de arquitetura nova econtra-se no drive (https://drive.google.com/file/d/1lfFRoWELXDzc1qfbsgWVOna_1l8oJOjV/view?pli=1)
+e da arquitetura antiga (https://drive.google.com/file/d/1lfFRoWELXDzc1qfbsgWVOna_1l8oJOjV/view?usp=sharing)
 
 ## Vídeo 
 
