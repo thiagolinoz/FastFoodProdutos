@@ -41,25 +41,6 @@ o script novamente.
 A aplicação possui Swagger que pode ser acessado através da URL `http://localhost:8080/swagger-ui/index.html`.
 
 ---
-Instruções para utilizar os endpoints disponíveis:
-O projeto já contém registros de pessoas e produtos previamente cadastradas.
-	📁 Localização da carga:
-	src/main/resources/db/migration/V5__CargaInicialDados.sql
-
-### PESSOAS
-👤 Cadastrar Pessoa
-Endpoint: POST /api/v1/pessoas
-**Requisição (JSON):**
-{
-  "cdDocPessoa": "12345678901",         // CPF válido (somente números)
-  "nmPessoa": "João da Silva",          // Nome completo
-  "tpPessoa": "CLIENTE",                // deve obrigatoriamente ser "CLIENTE".
-  "dsEmail": "joao.silva@email.com"     // E-mail válido
-}
-
-🔍  Buscar Pessoa por CPF
-Endpoint: GET /api/v1/pessoas/{cdDocPessoa}
-**Requisição :**O CPF (cdDocPessoa) deve ter sido previamente cadastrado via API ou constar na carga inicial de dados.
 
 ### PRODUTOS
 🔄  Atualiza produtos
@@ -104,63 +85,6 @@ Endpoint: Get /api/v1/produtos/categoria
 Informar tpCategory
 Retorna todos os produtos cadastrados por categoria
 
-### Pedidos
-🛒 Cadastra pedidos
-Endpoint: Post /api/v1/pedidos/checkout
-**Requisição (JSON):**
-{
-   "itens": [
-    {
-      "cdProduct": "973f263a-2cd4-4a73-acfa-bc863595bbb5", // UUID do pedido
-      "vlQuantidade": 2 // quantidade desejada
-    }
-  ]
-}
-
-▶️ Atualiza status
-Endpoint: Patch /api/v1/pedidos/{cdPedido}/status/{txStatus}
-**Requisição:**
-cdPedido:   // UUID do pedido
-txStatus: AGUARDANDO_PAGAMENTO,    //  outros status (
-    RECEBIDO, EM_PREPARACAO, PRONTO e FINALIZADO)
-
-
-🧾  Lista de Pedidos
-Endpoint: Get /api/v1/pedidos
-
-Retorna lista de pedidos ordenados com a seguinte regra:
-Pronto > Em Preparação > Recebido, pedidos mais antigos primeiro e mais novos depois. Status Finalizado não aparecem na lista.
-
-
-✅ Consulta status pedido
-Endpoint: Get /api/v1/pedidos/{nrPedido}/pagamento/status
-**Requisição:**
-Informar nrPedido
-Retorna o status do pedido informado
-
-
-### Webhook
-💳 Recebe notificação de pagamento do Mercado Pago
-Endpoint: Post /webhook/mercado-pago/pagamentos/{nrPedido}
-**Requisição (JSON):**
-{
-  	"pagamento": {
-   	 "status": "approved", // deve obrigatoriamente ser "approved".
-   	 "vlPagamento": 16       // Informar valor
- 	 }
-}
-
-    Ordem de execução: 
-    1. Cadastrar Pessoa
-        Endpoint: POST /api/v1/pessoas
-    2. Cadastra produtoModel
-        Endpoint: POST /api/v1/produtoModel
-    3. Cadastra pedidos
-        Endpoint: Post /api/v1/pedidos/checkout
-    4. Recebe notificação de pagamento do Mercado Pago
-        Endpoint: Post /webhook/mercado-pago/pagamentos/{nrPedido}
-    5. Atualiza status
-        Endpoint: Patch /api/v1/pedidos/{cdPedido}/status/{txStatus}
 
 # Preparando o ambiente para o K8s
 
@@ -209,9 +133,11 @@ Endpoint: Post /webhook/mercado-pago/pagamentos/{nrPedido}
 6. rodar
    ````bash
    kubectl port-forward service/app-service 30080:8080
+   
 ## Desenho de Arquitetura
-O arquido do desenho de arquitetura econtra-se na pasta ./arquitetura/arquitetura fase 2.drawio
+O arquido do desenho de arquitetura nova econtra-se no drive (https://drive.google.com/file/d/1lfFRoWELXDzc1qfbsgWVOna_1l8oJOjV/view?pli=1)
+e da arquitetura antiga (https://drive.google.com/file/d/1lfFRoWELXDzc1qfbsgWVOna_1l8oJOjV/view?usp=sharing)
 
 ## Vídeo 
-📹 https://youtu.be/2YXLZocAqf4
+
 
