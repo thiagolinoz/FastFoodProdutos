@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: app-produtos-config
 data:
-  DATASOURCE_URL: "jdbc:mysql://fiap-fastfood-aurora-instance-1.cleow80o855h.us-east-1.rds.amazonaws.com:3306/fiapfastfood" #"jdbc:mariadb://fastfood-db-service:3306/fiap-fastfood"
+  DATASOURCE_URL: "jdbc:mysql://fiap-fastfood-aurora-instance-1.c0sgdyfdxjwh.us-east-1.rds.amazonaws.com:3306/fiapfastfood" #"jdbc:mariadb://fastfood-db-service:3306/fiap-fastfood"
   MARIADB_DATABASE: "fiapfastfood"
